@@ -6,12 +6,14 @@
  * webpack.config.js是webpack默认配置文件，也可以在命令行执行配置文件
  * 如果要用ts进行配置，需要安装相关依赖：npm install --save-dev typescript ts-node @types/node @types/webpack
  *
- * @LastEditTime: 2022-01-31 11:21:29
+ * @LastEditTime: 2022-02-01 13:48:20
  * @FilePath: \engineering-about-frontend\01webpack-config\webpack.config.js
  */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const loaderRules = require('./loader-config/index.js')
+const loaderRules = require('./loader-config/index.js');
+/** mini-css-extract-plugin 可用来分离样式文件，并且支持按需加载css */
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path')
 module.exports = {
@@ -65,6 +67,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'webpack-config'
         }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        })
     ],
     // mode 配置可配合cross-env设置当前进程的全局变量
     mode: process.env.NODE_ENV,

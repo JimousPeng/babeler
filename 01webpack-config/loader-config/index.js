@@ -1,7 +1,7 @@
 /*
  * @Author: jimouspeng
  * @Date: 2022-01-31 11:19:41
- * @LastEditTime: 2022-02-01 12:10:17
+ * @LastEditTime: 2022-02-01 12:35:55
  * @LastEditors: your name
  * @Description: loader-配置文件
  * @FilePath: \engineering-about-frontend\01webpack-config\loader-config\index.js
@@ -9,6 +9,8 @@
  */
 
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = [
     {
         test: /\.js$/,
@@ -32,7 +34,16 @@ module.exports = [
         // 单独只使用css-loader的话，页面无法生效，因为css-loader的作用仅仅是处理了CSS的各种加载语法，import,url()函数等
         // 如果样式要起作用，还需要style-loader来把样式插入页面。
         // loader的调用是从后往前，所有style-loader要放到前面
-        use: ['style-loader', 'css-loader'],
+        // use: ['style-loader', 'css-loader'],
+        use: [
+            {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                    publicPath: './'
+                }
+            },
+            'css-loader',
+        ],
     },
     /**
      * file-loader: 用于打包文件类型的资源，并返回其publicPath
