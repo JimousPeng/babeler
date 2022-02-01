@@ -2,12 +2,13 @@
  * @Date: 2022-01-28 16:13:58
  * @LastEditors: your name
  * @Description: 描述文件内容
- * @LastEditTime: 2022-01-31 11:18:00
+ * @LastEditTime: 2022-02-01 14:01:39
  * @FilePath: \engineering-about-frontend\01webpack-config\src\index.js
  */
 
 import '@/style/index.css'
 import ImgUrl from '@/image/jimous.jpg';
+import('./a.js')
 console.log(ImgUrl, '看看图片地址')
 
 import indexHtml from '@/template/index.html';

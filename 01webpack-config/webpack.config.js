@@ -6,7 +6,7 @@
  * webpack.config.js是webpack默认配置文件，也可以在命令行执行配置文件
  * 如果要用ts进行配置，需要安装相关依赖：npm install --save-dev typescript ts-node @types/node @types/webpack
  *
- * @LastEditTime: 2022-02-01 13:48:20
+ * @LastEditTime: 2022-02-01 14:10:14
  * @FilePath: \engineering-about-frontend\01webpack-config\webpack.config.js
  */
 
@@ -25,7 +25,8 @@ module.exports = {
     // 后续请求页面时会加快整体的渲染速度。 这块后面结合vue或react来讲解
     // 这里cool即为chunkname，对应webpack模板变量[name]的值映射
     entry: {
-        cool:  './index.js'
+        cool:  './index.js',
+        // vendor: ['vue']
     },
     /** 
      * webpack4.x以上版本output默认输出路径为 /dist/main.js, 可不配置
@@ -37,10 +38,17 @@ module.exports = {
         publicPath: '',
         // [name]: chunk-name的模板变量，
         // webpack还提供[hash: 本地打包所有资源生成的hash],  [chunkhash: 当前chunk内容的hash], [id: chunkid], [query: 指代filename配置项中的query]等模板变量
-        filename: 'jimous[name].js',
+        filename: '[name].js',
         library: 'jimous',
         //  output.libraryTarget：默认暴露为'var', 即当 library 加载完成，入口起点的返回值将分配给一个变量，后续配置组件库需要更改该配置
         libraryTarget: 'var',
+    },
+    // https://www.webpackjs.com/plugins/split-chunks-plugin/
+    optimization: {
+        // 代码分片， 针对异步模块，不需要配置也能生效
+        // splitChunks: {
+        //     chunks: 'all'
+        // }
     },
     /**resolve: 设置模块如何被解析
      * resolver 是一个库(library),帮助webpack找到bundle中需要引入的模块代码
