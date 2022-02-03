@@ -1,11 +1,16 @@
 /*
  * @Author: jimouspeng
  * @Date: 2022-01-31 11:19:41
- * @LastEditTime: 2022-02-01 12:35:55
+ * @LastEditTime: 2022-02-03 10:08:57
  * @LastEditors: your name
  * @Description: loader-配置文件
  * @FilePath: \engineering-about-frontend\01webpack-config\loader-config\index.js
  * 可以输入预定的版权声明、个性签名、空行等
+ */
+
+/** 宏观角度看，提升性能的方法无非两种，
+ * 增加资源： 使用更多的CPU和内存，用更多的计算能力来缩短执行任务的时间，可以结合使用HappyPack
+ * 缩小范围：针对任务本身，比如去掉冗余的流程，尽量不做重复性的工作等。合理利用exclude和include
  */
 
 const path = require('path');
@@ -36,6 +41,7 @@ module.exports = [
         // loader的调用是从后往前，所有style-loader要放到前面
         // use: ['style-loader', 'css-loader'],
         use: [
+            // 使用MiniCssExtractPlugin分离样式文件
             {
                 loader: MiniCssExtractPlugin.loader,
                 options: {

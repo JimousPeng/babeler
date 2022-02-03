@@ -6,7 +6,7 @@
  * webpack.config.js是webpack默认配置文件，也可以在命令行执行配置文件
  * 如果要用ts进行配置，需要安装相关依赖：npm install --save-dev typescript ts-node @types/node @types/webpack
  *
- * @LastEditTime: 2022-02-02 22:34:19
+ * @LastEditTime: 2022-02-03 21:27:14
  * @FilePath: \engineering-about-frontend\01webpack-config\webpack.config.js
  */
 
@@ -29,8 +29,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 // 帮助分析bundle构成的插件,可以通过在package.json配置进行自动化的对资源体积进行监控.
 const Analyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+// size-plugin: 每次打包后都会输出本地构建的资源体积，以及与上次构建相比体积变化了多少。
+const sizePlugin = require('size-plugin')
+
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasurePlugin();
+
 const path = require('path');
-module.exports = {
+const wepbackConfig = {
     // context: 可以理解为资源入口的路径前缀，必须使用绝对路径
     context: path.join(__dirname, './src'),
     // 当配置了context的前提下，这里默认是访问src下的文件
@@ -80,12 +86,13 @@ module.exports = {
     // plugins： webpack插件配置
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './compile-config/template.html')
+            template: path.resolve(__dirname, './compile-config/template.html'),
         }),
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css',
-        }),
+        new sizePlugin(),
+        // new MiniCssExtractPlugin({
+        //     filename: '[name].css',
+        //     chunkFilename: '[id].css',
+        // }),
         // new OptimizeCSSAssetsPlugin({
         //     // 生效范围，只压缩匹配到的资源
         //     assetNameRegExp: /\.css$/g,
@@ -113,6 +120,7 @@ module.exports = {
     devServer: {
         static: path.resolve(__dirname, 'public'),
         open: true,
+        hot: true, // 开启模块热替换
     },
     // webpack 4以上版本配置js压缩，如果开启了mode: production, 则不需要人为设置。
     // webpack 4默认使用了terser的插件 terser-webpack-plugin
@@ -136,3 +144,21 @@ module.exports = {
         ],
     },
 };
+
+// module.exports = wepbackConfig;
+
+const configWithTimeCalculate = smp.wrap(wepbackConfig);
+
+// 为了解决以下报错，将minicssExtractPlugin的插件配置放在SpeedMeasurePlugin配置后
+// 参考issue: https://github.com/stephencookdev/speed-measure-webpack-plugin/issues/167
+// You forgot to add 'mini-css-extract-plugin' plugin (i.e. `{ plugins: [new MiniCssExtractPlugin()] }`), 
+// please read https://github.com/webpack-contrib/mini-css-extract-plugin#getting-started
+
+configWithTimeCalculate.plugins.push(
+    new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+    })
+);
+
+module.exports = configWithTimeCalculate;
