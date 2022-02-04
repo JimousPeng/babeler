@@ -1,0 +1,13 @@
+{
+  "name": "04RollupTool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "rollup -c ./rollup.config.js" // 也可以直接终端执行，-c 告诉rollup使用该配置文件
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
