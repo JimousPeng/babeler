@@ -1,0 +1,27 @@
+/*
+ * @Date: 2021-12-21 18:03:21
+ * @LastEditors: jimouspeng
+ * @Description: 打包入口文件解析
+ * @LastEditTime: 2022-02-09 15:26:40
+ * @FilePath: \engineering-about-frontend\03component-library\compile\getEntryTool.js
+ */
+const fs = require('fs');
+const baseDir = './src';
+const outputDir = './lib';
+module.exports = () => {
+    const entryList = {
+        index: `${baseDir}/index.js`,
+    };
+    /** 获取组件列表数组 */
+    const componentsList = fs.readdirSync(`${baseDir}/components`);
+    componentsList.length && componentsList.forEach((el) => {
+        const getCurrentJs = fs.readdirSync(`${baseDir}/components/${el}`);
+        if (getCurrentJs.length === 0) return;
+        const dirPath = `${outputDir}/${el}`;
+        entryList[el] = `${baseDir}/components/${el}/${getCurrentJs[0]}`;
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath);
+        }
+    });
+    return entryList;
+};
