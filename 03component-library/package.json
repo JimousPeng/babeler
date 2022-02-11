@@ -1,11 +1,12 @@
 {
-  "name": "03component-library",
-  "version": "1.0.0",
-  "description": "",
+  "name": "jimous-vue-components",
+  "version": "0.0.2",
+  "description": "jimous Vue components library",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack"
+    "dev": "cross-env NODE_ENV=development webpack",
+    "forpublic": "cross-env NODE_ENV=production webpack && npm publish"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "@babel/runtime": "^7.17.2",
     "@babel/runtime-corejs3": "^7.17.2",
     "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.6.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",

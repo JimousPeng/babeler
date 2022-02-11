@@ -2,7 +2,7 @@
  * @Date: 2022-02-09 15:08:45
  * @LastEditors: jimouspeng
  * @Description: webpack配置文件
- * @LastEditTime: 2022-02-09 18:14:24
+ * @LastEditTime: 2022-02-11 10:43:04
  * @FilePath: \engineering-about-frontend\03component-library\webpack.config.js
  */
 
@@ -16,8 +16,9 @@ module.exports = {
     output: {
         path: path.resolve('./lib'),
         filename: '[name]/index.js',
-        // library: 'MyLibrary',
-        // libraryTarget: 'umd',
+        library: 'MyLibrary',
+        // 作为组件库打包，输出文件类型应该是umd类型
+        libraryTarget: 'umd',
     },
     module: {
         rules: [
@@ -42,7 +43,7 @@ module.exports = {
             "@": path.resolve(__dirname, './components')
         },
     },
-    mode: 'development',
+    mode: process.env.NODE_ENV,
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './template.html'),

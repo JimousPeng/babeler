@@ -2,12 +2,18 @@
  * @Date: 2021-12-21 18:03:21
  * @LastEditors: jimouspeng
  * @Description: 打包入口文件解析
- * @LastEditTime: 2022-02-09 15:26:40
+ * @LastEditTime: 2022-02-11 10:04:44
  * @FilePath: \engineering-about-frontend\03component-library\compile\getEntryTool.js
  */
 const fs = require('fs');
 const baseDir = './src';
 const outputDir = './lib';
+
+/**
+ * 生成打包入口配置路径
+ * @returns { index: './src/index.js', 'show-dialog': './src/components/show-dialog/index.js', ... }
+ */
+
 module.exports = () => {
     const entryList = {
         index: `${baseDir}/index.js`,
