@@ -1,6 +1,6 @@
 {
   "name": "jimous-vue-components",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "jimous Vue components library",
   "main": "index.js",
   "scripts": {
