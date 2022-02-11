@@ -1,0 +1,30 @@
+<!--
+ * @Date: 2021-12-01 17:23:59
+ * @LastEditors: jimouspeng
+ * @Description: 描述文件内容
+ * @LastEditTime: 2022-01-24 14:27:23
+ * @FilePath: \react-components\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <form id="formEl" action="post"></form>
+</head>
+<body>
+    <input type="file" id="inputFile">
+    <script>
+        const getInput = document.getElementById('inputFile');
+        getInput.addEventListener('change', file => {
+            console.log(file.target.files[0], '打印file---------');
+            const dataFile = new FormData(document.getElementById('formEl'));
+            dataFile.append('file', file.target.files[0]);
+            console.log(dataFile, '---------');
+        })
+    </script>
+    <!-- <script  src="./public/main.js"></script> -->
+</body>
+</html>
