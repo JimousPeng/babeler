@@ -9,5 +9,6 @@
 2. webpack-merge 配置合并工具, 用于配置抽离
 3. speed-measure-webpack-plugin,用于分析整个webpack打包过程中在各个loader和plugin上耗费的时间。
 4. webpack-bundle-analyzer  打包文件分析工具,生成图片展示占用 https://www.npmjs.com/package/webpack-bundle-analyzer
+5. MomentLocalesPlugin 这里我们可以通过moment-locales-webpack-plugin 插件来告知webpack 打包时我们希望包含哪些语言包
 
 有些插件会影响编译本身的速度，建议用一个命令单独进行编译监听，使用这些插件进行调优监控
