@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-02-09 15:08:45
- * @LastEditors: jimouspeng
+ * @LastEditors: Please set LastEditors
  * @Description: webpack配置文件
- * @LastEditTime: 2022-02-11 10:43:04
+ * @LastEditTime: 2022-04-20 16:24:29
  * @FilePath: \engineering-about-frontend\03component-library\webpack.config.js
  */
 
@@ -16,7 +16,7 @@ module.exports = {
     output: {
         path: path.resolve('./lib'),
         filename: '[name]/index.js',
-        library: 'MyLibrary',
+        library: '[name]',
         // 作为组件库打包，输出文件类型应该是umd类型
         libraryTarget: 'umd',
     },

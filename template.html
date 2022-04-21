@@ -1,0 +1,38 @@
+<!--
+ * @Author: jimouspeng
+ * @Date: 2022-04-20 10:27:01
+ * @Description: 前端微组件demo实践 
+ * @FilePath: \engineering-about-frontend\template.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="module"></div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="./index.js"></script>
+        <script>
+            const ComponetCtx = window['show-model'].default;
+            console.log('hahahha');
+            new ComponetCtx({
+                propsData: {
+                    age: 26,
+                },
+            }).$mount('#module');
+            /** 如果用render函数处理传参 */
+            // new Vue({
+            //     render: (h) =>
+            //         h(ComponetCtx, {
+            //             props: {
+            //                 age: 27,
+            //             },
+            //         }),
+            // }).$mount('#module');
+        </script>
+    </body>
+</html>
