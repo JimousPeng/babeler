@@ -8,7 +8,7 @@
                     "safari": "10",
                     "ie": "11"
                 },
-                "modules": false
+                "modules": false // 交给rollup处理
             }
         ]
     ],
@@ -16,7 +16,8 @@
         [
             "@babel/plugin-transform-runtime",
             {
-                "corejs": 3
+                "corejs": 3,
+                "useESModules": true // 交给rollup 处理
             }
         ]
     ]
