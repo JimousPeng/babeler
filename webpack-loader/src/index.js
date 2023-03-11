@@ -1,5 +1,6 @@
 import '../style/index.scss';
 import '../style/common.css';
+
 // import css from '../style/index.css';
 // import commoncss from '../style/common.css';
 // console.log('打印一下', css, commoncss);
@@ -12,3 +13,17 @@ const newEl = document.createElement('div');
 newEl.classList.add('color-span');
 newEl.innerHTML = '<span>hello world</span>';
 document.body.appendChild(newEl);
+
+import imgData from '@/images/01.jpg';
+import imgurl from '@/images/04.jpg';
+console.log('测试一下打印数据', imgurl);
+createIMG(imgData);
+createIMG(imgurl);
+
+function createIMG(url) {
+    const imgEl = document.createElement('img');
+    imgEl.setAttribute('src', url);
+    document.body.appendChild(imgEl);
+}
+
+console.log(imgData);
