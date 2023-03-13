@@ -1,12 +1,12 @@
 /*
  * @Date: 2022-01-28 15:59:33
- * @LastEditors: your name
+ * @LastEditors: Please set LastEditors
  *
  * @Description:
  * webpack.config.js是webpack默认配置文件，也可以在命令行执行配置文件
  * 如果要用ts进行配置，需要安装相关依赖：npm install --save-dev typescript ts-node @types/node @types/webpack
  *
- * @LastEditTime: 2022-02-03 21:27:14
+ * @LastEditTime: 2023-03-13 11:56:57
  * @FilePath: \engineering-about-frontend\01webpack-config\webpack.config.js
  */
 
@@ -153,6 +153,8 @@ const configWithTimeCalculate = smp.wrap(wepbackConfig);
 // 参考issue: https://github.com/stephencookdev/speed-measure-webpack-plugin/issues/167
 // You forgot to add 'mini-css-extract-plugin' plugin (i.e. `{ plugins: [new MiniCssExtractPlugin()] }`), 
 // please read https://github.com/webpack-contrib/mini-css-extract-plugin#getting-started
+// 初始化MiniCssExtractPlugin插件时，在绑定的compilation钩子上为loader执行上下文绑定了experimentalUseImportModule属性，由于SpeedMeasurePlugin接管了plugin初始化的this，导致
+// loader使用MiniCssExtractPlugin.loader时无法找到experimentalUseImportModule属性，然后抛出错误。
 
 configWithTimeCalculate.plugins.push(
     new MiniCssExtractPlugin({
