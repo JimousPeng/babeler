@@ -12,7 +12,10 @@ const TemplateWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const webpackConfig = {
-    entry: path.resolve(__dirname, './src/index.js'),
+    entry: {
+        index: path.resolve(__dirname, './src/index.js'),
+        vendor: ['./src/add.js'],
+    },
     output: {
         filename: '[name]_[chunkhash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -21,6 +24,19 @@ const webpackConfig = {
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
+        },
+    },
+    optimization: {
+        /**
+         * splitChunks.minSizeReduction 生成 chunk 所需的主 chunk（bundle）的最小体积（以字节为单位）缩减。
+         * 这意味着如果分割成一个 chunk 并没有减少主 chunk（bundle）的给定字节数，它将不会被分割，即使它满足 splitChunks.minSize
+         *
+         * splitChunks.minSize 生成 chunk 的最小体积（以 bytes 为单位）
+         */
+        splitChunks: {
+            chunks: 'all',
+            minSize: 0,
+            minSizeReduction: 0,
         },
     },
     devServer: {

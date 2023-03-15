@@ -9,6 +9,10 @@ import '../style/common.css';
 // style.innerHTML = css[0][1] + commoncss[0][1];
 // document.getElementsByTagName('head')[0].appendChild(style);
 
+import { calculate } from './a.js';
+import { cutdown } from './b';
+console.log(calculate(1), '打印数据', cutdown(9));
+
 const newEl = document.createElement('div');
 newEl.classList.add('color-span');
 newEl.innerHTML = '<span>hello world</span>';
